@@ -24,7 +24,7 @@ import androidx.navigation.NavHostController
 import com.ismartcoding.lib.helpers.CoroutinesHelper.withIO
 import com.ismartcoding.plain.R
 import com.ismartcoding.plain.enums.AppFeatureType
-import com.ismartcoding.plain.features.AudioPlayer
+import com.ismartcoding.plain.audio.AudioPlayer
 import com.ismartcoding.plain.features.locale.LocaleHelper
 import com.ismartcoding.plain.preferences.AudioSortByPreference
 import com.ismartcoding.plain.ui.base.AnimatedBottomAction

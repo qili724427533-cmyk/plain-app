@@ -11,7 +11,8 @@ import com.ismartcoding.plain.enums.DataType
 import com.ismartcoding.plain.features.Permission
 import com.ismartcoding.plain.features.TagHelper
 import com.ismartcoding.plain.features.file.FileSortBy
-import com.ismartcoding.plain.features.media.AudioMediaStoreHelper
+import com.ismartcoding.plain.audio.AudioMediaStoreHelper
+import com.ismartcoding.plain.docs.DocMediaStoreHelper
 import com.ismartcoding.plain.features.media.ImageMediaStoreHelper
 import com.ismartcoding.plain.features.media.VideoMediaStoreHelper
 import com.ismartcoding.plain.preferences.AudioPlaylistPreference
@@ -63,6 +64,8 @@ fun SchemaBuilder.addVideoMediaSchema() {
                     }
                 } else if (type == DataType.VIDEO) {
                     VideoMediaStoreHelper.getBucketsAsync(context).map { it.toModel() }
+                } else if (type == DataType.DOC) {
+                    DocMediaStoreHelper.getDocBucketsAsync(context).map { it.toModel() }
                 } else {
                     emptyList()
                 }
@@ -91,6 +94,11 @@ fun SchemaBuilder.addVideoMediaSchema() {
                     ids = if (hasTrashFeature) ImageMediaStoreHelper.getTrashedIdsAsync(context, query) else ImageMediaStoreHelper.getIdsAsync(context, query)
                     ImageMediaStoreHelper.deleteRecordsAndFilesByIdsAsync(context, ids, true)
                     ImageIndexManager.enqueueRemove(ids)
+                }
+
+                DataType.DOC -> {
+                    ids = if (hasTrashFeature) DocMediaStoreHelper.getTrashedIdsAsync(context, query) else DocMediaStoreHelper.getIdsAsync(context, query)
+                    DocMediaStoreHelper.deleteByIdsAsync(context, ids)
                 }
 
                 else -> {
@@ -128,6 +136,11 @@ fun SchemaBuilder.addVideoMediaSchema() {
                     ImageIndexManager.enqueueRemove(ids)
                 }
 
+                DataType.DOC -> {
+                    ids = DocMediaStoreHelper.getIdsAsync(context, query)
+                    DocMediaStoreHelper.trashByIdsAsync(context, ids)
+                }
+
                 else -> {
                 }
             }
@@ -158,6 +171,11 @@ fun SchemaBuilder.addVideoMediaSchema() {
                     ids = ImageMediaStoreHelper.getTrashedIdsAsync(context, query)
                     ImageMediaStoreHelper.restoreByIdsAsync(context, ids)
                     ImageIndexManager.enqueueAdd(ids)
+                }
+
+                DataType.DOC -> {
+                    ids = DocMediaStoreHelper.getTrashedIdsAsync(context, query)
+                    DocMediaStoreHelper.restoreByIdsAsync(context, ids)
                 }
 
                 else -> {

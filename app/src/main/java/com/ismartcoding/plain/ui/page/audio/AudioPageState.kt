@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import com.ismartcoding.plain.data.DAudio
+import com.ismartcoding.plain.audio.DAudio
 import com.ismartcoding.plain.data.DMediaBucket
 import com.ismartcoding.plain.db.DTag
 import com.ismartcoding.plain.db.DTagRelation

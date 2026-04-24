@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ismartcoding.plain.data.IData
 import com.ismartcoding.plain.enums.DataType
 import com.ismartcoding.plain.features.TagHelper
-import com.ismartcoding.plain.features.media.AudioMediaStoreHelper
+import com.ismartcoding.plain.audio.AudioMediaStoreHelper
 import com.ismartcoding.plain.features.media.ImageMediaStoreHelper
 import com.ismartcoding.plain.features.media.VideoMediaStoreHelper
 import com.ismartcoding.plain.ui.helpers.DialogHelper
